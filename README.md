@@ -1,139 +1,67 @@
 Credit Card Customer Churn Prediction
 📌 Overview
 This project predicts whether a credit card customer will churn (exit) using a Neural Network (ANN) built with TensorFlow/Keras.
-The dataset used is Churn_Modelling.csv from the Kaggle dataset: Credit Card Customer Churn Prediction.
-The notebook walks through:
+It uses the Churn_Modelling.csv dataset from Kaggle and covers the full pipeline from data preprocessing to model evaluation.
 
-Data loading & preprocessing
-
-Feature encoding & scaling
-
-Building and training an ANN model
-
-Model evaluation
-
-Accuracy and loss visualization
-
-📂 Dataset
-File: Churn_Modelling.csv
-Size: 10,000 rows × 14 columns
-
-Key columns:
-CreditScore: Customer credit score
-
-Geography: Country (France, Spain, Germany)
-
-Gender: Male/Female
-
-Age
-
-Tenure: Years of being a customer
-
-Balance
-
-NumOfProducts: Number of bank products
-
-HasCrCard: 1 = has a credit card
-
-IsActiveMember: 1 = active
-
-EstimatedSalary
-
-Exited: Target variable (1 = churned, 0 = retained)
-
+📂 Dataset Information
+Attribute	Description
+File	Churn_Modelling.csv
+Size	10,000 rows × 14 columns
+Target Variable	Exited (0 = retained, 1 = churned)
+Key Columns
+Column	Type	Description
+CreditScore	Numeric	Customer’s credit score
+Geography	Categorical	Country (France, Spain, Germany)
+Gender	Categorical	Male/Female
+Age	Numeric	Customer age
+Tenure	Numeric	Number of years customer has stayed
+Balance	Numeric	Account balance
+NumOfProducts	Numeric	Bank products held
+HasCrCard	Binary	1 = has a credit card, 0 = no card
+IsActiveMember	Binary	1 = active customer
+EstimatedSalary	Numeric	Estimated salary
+Exited	Binary	Target — 1 = churned, 0 = retained
 🔄 Workflow
-1️⃣ Data Loading
-Loads the CSV from the Kaggle input directory:
-
-python
-df = pd.read_csv('/kaggle/input/credit-card-customer-churn-prediction/Churn_Modelling.csv')
-2️⃣ Preprocessing
-Drop irrelevant columns (RowNumber, CustomerId, Surname)
-
-Encode categorical variables:
-
-Geography → One-Hot Encoding
-
-Gender → Binary Encoding
-
-Combine into a clean numerical feature set
-
-Split into x_train, x_test, y_train, y_test
-
-Apply StandardScaler
-
-3️⃣ Model Architecture
-Sequential ANN model:
-
-text
-Input Layer → Dense(11, relu)
-               ↓
-            Dense(11, relu)
-               ↓
-            Dense(1, sigmoid)
-Loss: binary_crossentropy
-
+Step	Description
+1. Data Loading	Load dataset using pandas.read_csv()
+2. Cleaning	Drop irrelevant columns: RowNumber, CustomerId, Surname
+3. Encoding	One-hot encode Geography, binary encode Gender
+4. Scaling	Apply StandardScaler to numerical features
+5. Train/Test Split	80% training, 20% testing
+6. Model Building	Build a Sequential ANN with 3 layers
+7. Training	Train for 100 epochs with validation
+8. Evaluation	Predict and compute accuracy on test data
+🧠 Model Architecture
+Layer	Units	Activation	Parameters
+Dense_1	11	ReLU	132
+Dense_2	11	ReLU	132
+Output	1	Sigmoid	12
+Total Parameters: 276
+Loss Function: Binary Crossentropy
 Optimizer: Adam
+Metric: Accuracy
 
-Metric: accuracy
-
-4️⃣ Training
-Epochs: 100
-
-Batch size: (default by Keras)
-
-Validation split: 0.2
-
-History recorded for accuracy/loss plotting
-
-5️⃣ Evaluation
-Predict probabilities → Convert to 0 or 1 (>0.5)
-
-Accuracy score on test set ≈ 86.7%
-
-Model training/validation curves stored in history.history
-
-📊 Example Accuracy/Loss
-text
-Final Training Accuracy: ~87.8%
-Final Validation Accuracy: ~85.5%
-Test Accuracy: 0.867
+📊 Training Results
+Metric	Training Set	Validation Set	Test Set
+Accuracy	~87.85%	~85.50%	86.70%
+Loss	~0.296	~0.346	~0.347
 ▶️ How to Run
-Upload to Kaggle or run locally with Jupyter Notebook.
-
-Install requirements (if not using Kaggle):
-
-bash
-pip install numpy pandas scikit-learn tensorflow matplotlib
-Place the Churn_Modelling.csv file in the correct directory.
-
-Run all cells sequentially to:
-
-Preprocess data
-
-Train the model
-
-Evaluate performance
-
-📈 Possible Improvements
-Tune hyperparameters (layers, neurons, learning rate)
-
-Use dropout or regularization to reduce overfitting
-
-Try advanced models (XGBoost, LightGBM)
-
-Balance the dataset (SMOTE/undersampling)
-
+Step	Command / Action
+1	Upload notebook and dataset to Kaggle or run locally
+2	Install dependencies: pip install numpy pandas scikit-learn tensorflow matplotlib
+3	Ensure Churn_Modelling.csv is in the same directory
+4	Run cells sequentially to preprocess, train, and evaluate
+🚀 Possible Improvements
+Area	Suggestion
+Hyperparameters	Tune epochs, batch size, learning rate
+Architecture	Add dropout layers for regularization
+Alternative Models	Try XGBoost, LightGBM
+Data Balancing	Use SMOTE or undersampling to address class imbalance
 🛠 Dependencies
-Python 3.x
-
-numpy
-
-pandas
-
-scikit-learn
-
-tensorflow / keras
-
-matplotlib
-
+Package	Version (Recommended)
+Python	3.x
+numpy	>=1.19
+pandas	>=1.1
+scikit-learn	>=0.24
+tensorflow/keras	>=2.6
+matplotlib	>=3.3
